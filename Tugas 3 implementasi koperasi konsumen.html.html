@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koperasi Simpan Pinjam Konsumen</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+
+        header {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #27ae60 3px solid;
+        }
+
+        header h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            background: #34495e;
+            color: #fff;
+        }
+
+        nav ul {
+            padding: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        nav li {
+            display: inline;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 15px;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background: #2c3e50;
+            color: #27ae60;
+        }
+
+        main {
+            padding: 30px 0;
+        }
+
+        section {
+            background: #fff;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            display: inline-block;
+            background: #27ae60;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #2ecc71;
+        }
+
+        #saldo-display {
+            background: #27ae60;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        #riwayat ul {
+            list-style-type: none;
+        }
+
+        #riwayat li {
+            background: #ecf0f1;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        @media(max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+
+            nav a {
+                padding: 10px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Koperasi Simpan Pinjam Konsumen</h1>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#beranda" class="nav-link">Beranda</a></li>
+                <li><a href="#simpan" class="nav-link">Simpan</a></li>
+                <li><a href="#pinjam" class="nav-link">Pinjam</a></li>
+                <li><a href="#riwayat" class="nav-link">Riwayat</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div id="saldo-display">
+            Saldo Anda: <span id="saldo">Rp 0</span>
+        </div>
+
+        <section id="beranda">
+            <h2>Selamat Datang di Koperasi Simpan Pinjam Konsumen</h2>
+            <p>Silakan pilih layanan yang Anda butuhkan melalui menu di atas.</p>
+        </section>
+
+        <section id="simpan" style="display:none;">
+            <h2>Formulir Simpanan</h2>
+            <form id="form-simpan">
+                <div class="form-group">
+                    <label for="jumlah-simpan">Jumlah Simpanan:</label>
+                    <input type="number" id="jumlah-simpan" required>
+                </div>
+                <div class="form-group">
+                    <label for="tanggal-simpan">Tanggal Simpan:</label>
+                    <input type="date" id="tanggal-simpan" required>
+                </div>
+                <button type="submit">Simpan Dana</button>
+            </form>
+        </section>
+
+        <section id="pinjam" style="display:none;">
+            <h2>Formulir Pinjaman</h2>
+            <form id="form-pinjam">
+                <div class="form-group">
+                    <label for="jumlah-pinjam">Jumlah Pinjaman:</label>
+                    <input type="number" id="jumlah-pinjam" required>
+                </div>
+                <div class="form-group">
+                    <label for="jangka-waktu">Jangka Waktu (bulan):</label>
+                    <input type="number" id="jangka-waktu" required>
+                </div>
+                <div class="form-group">
+                    <label for="tujuan-pinjaman">Tujuan Pinjaman:</label>
+                    <input type="text" id="tujuan-pinjaman" required>
+                </div>
+                <button type="submit">Ajukan Pinjaman</button>
+            </form>
+        </section>
+
+        <section id="riwayat" style="display:none;">
+            <h2>Riwayat Transaksi</h2>
+            <table id="tabel-riwayat">
+                <thead>
+                    <tr>
+                        <th>Tanggal</th>
+                        <th>Tipe</th>
+                        <th>Jumlah</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Riwayat transaksi akan ditambahkan di sini -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script>
+        let currentUser = {
+            id: 1,
+            nama: "John Doe",
+            saldo: 1000000
+        };
+
+        let transaksi = [
+            { id: 1, tipe: "simpan", jumlah: 500000, tanggal: "2024-01-01", status: "sukses" },
+            { id: 2, tipe: "pinjam", jumlah: 1000000, tanggal: "2024-01-15", status: "disetujui" }
+        ];
+
+        function tampilkanSaldo() {
+            document.getElementById('saldo').textContent = `Rp ${currentUser.saldo.toLocaleString('id-ID')}`;
+        }
+
+        function showSection(sectionId) {
+            const sections = ['beranda', 'simpan', 'pinjam', 'riwayat'];
+            sections.forEach(section => {
+                document.getElementById(section).style.display = section === sectionId ? 'block' : 'none';
+            });
+            if (sectionId === 'riwayat') {
+                tampilkanRiwayat();
+            }
+        }
+
+        function prosesSimapan(e) {
+            e.preventDefault();
+            const jumlah = parseInt(document.getElementById('jumlah-simpan').value);
+            const tanggal = document.getElementById('tanggal-simpan').value;
+            
+            if (isNaN(jumlah) || jumlah <= 0) {
+                alert("Jumlah simpanan tidak valid");
+                return;
+            }
+
+            currentUser.saldo += jumlah;
+            transaksi.push({ 
+                id: transaksi.length + 1, 
+                tipe: "simpan", 
+                jumlah: jumlah, 
+                tanggal: tanggal,
+                status: "sukses"
+            });
+            
+            tampilkanSaldo();
+            alert(`Simpanan sebesar Rp ${jumlah.toLocaleString('id-ID')} berhasil ditambahkan.`);
+            document.getElementById('form-simpan').reset();
+        }
+
+        function prosesPinjaman(e) {
+            e.preventDefault();
+            const jumlah = parseInt(document.getElementById('jumlah-pinjam').value);
+            const jangkaWaktu = parseInt(document.getElementById('jangka-waktu').value);
+            const tujuan = document.getElementById('tujuan-pinjaman').value;
+            
+            if (isNaN(jumlah) || jumlah <= 0 || isNaN(jangkaWaktu) || jangkaWaktu <= 0) {
+                alert("Jumlah pinjaman atau jangka waktu tidak valid");
+                return;
+            }
+
+            transaksi.push({ 
+                id: transaksi.length + 1, 
+                tipe: "pinjam", 
+                jumlah: jumlah, 
+                tanggal: new Date().toISOString().split('T')[0],
+                status: "menunggu persetujuan",
+                jangkaWaktu: jangkaWaktu,
+                tujuan: tujuan
+            });
+
+            alert(`Pengajuan pinjaman sebesar Rp ${jumlah.toLocaleString('id-ID')} untuk ${tujuan} selama ${jangkaWaktu} bulan telah diterima. Mohon tunggu persetujuan.`);
+            document.getElementById('form-pinjam').reset();
+        }
+
+        function tampilkanRiwayat() {
+            const tabelBody = document.querySelector('#tabel-riwayat tbody');
+            tabelBody.innerHTML = '';
+            
+            transaksi.forEach(t => {
+                let row = tabelBody.insertRow();
+                row.insertCell(0).textContent = t.tanggal;
+                row.insertCell(1).textContent = t.tipe.charAt(0).toUpperCase() + t.tipe.slice(1);
+                row.insertCell(2).textContent = `Rp ${t.jumlah.toLocaleString('id-ID')}`;
+                row.insertCell(3).textContent = t.status.charAt(0).toUpperCase() + t.status.slice(1);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const sectionId = this.getAttribute('href').substring(1);
+                    showSection(sectionId);
+                });
+            });
+
+            document.getElementById('form-simpan').addEventListener('submit', prosesSimapan);
+            document.getElementById('form-pinjam').addEventListener('submit', prosesPinjaman);
+
+            tampilkanSaldo();
+            showSection('beranda');
+        });
+    </script>
+</body>
+</html>
